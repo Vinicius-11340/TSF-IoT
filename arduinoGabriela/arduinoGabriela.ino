@@ -31,9 +31,17 @@ void setup() {
     Serial.print(".");
     delay(200);
   }
-  Serial.println("\nBroker Conection Succeed")
+  mqttClient.subscribe("AulaIOT/msg");
+  Serial.println("\nBroker Conection Succeed");
 }
 
 void loop() {
+  
+}
 
+void callback(char* topic, byte* payload, unsigned long length){
+  String msg = "Gabriela: Oi";
+  String topico = "AulaIOT/msg";
+  mqtt.publish(topico.c_str(), msg.c_str());
+  delay(2000);
 }
