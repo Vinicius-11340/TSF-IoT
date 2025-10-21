@@ -1,18 +1,6 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
-
-WiFiClient client;
-PubSubClient mqtt(client);
-
-const String SSID = "FIESC_IOT_EDU";
-const String PASS = "8120gv08";
-const String topico = "TopicoVini";
-
-const String brokerURL = "test.mosquitto.org";
-const int brokerPort = 1883 ;
-
-const String brokerUser = "";
-const String brokerPass = "";
+#include "env.h"
 
 void setup() {
   Serial.begin(115200);    //configura a placa pra mostrar na tela
@@ -24,15 +12,16 @@ void setup() {
   }
   Serial.println("Conectado com Sucesso parceiro!");
   Serial.println("Conectando no Broker");
-  mqtt.setServer(brokerURL.c_str(), brokerPort);
+  mqtt.setServer(BROKER_URL, BROKER_PORT);
   String boardID = "S1-";
-  boardID += String(random(0xffff), HEX);
+  userID += String(random(0xffff), HEX);
 
-  while (!mqtt.connect(boardID.c_str())) {
+  while (!mqtt.connected()){
+    mqttClient.connect(userID.c_str(),BROKER_USR_NAME, BROKER_USR_PASS); {
     Serial.print(".");
     delay(200);
   }
-  mqtt.subscribe(topico.c_str());
+  mqtt.subscribe(TOPIC1);
   mqtt.setCallback(callback);
   Serial.println("\nConectado com sucesso ao broker!");
   pinMode(2, OUTPUT);
