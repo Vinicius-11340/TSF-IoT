@@ -6,10 +6,10 @@ PubSubClient mqtt(client);
 
 const String SSID = "FIESC_IOT_EDU";
 const String PASS = "8120gv08";
-const String topico = "TopicoVini";
+const String topico = "StrogonoffcomBatataPalha";
 
 const String brokerURL = "test.mosquitto.org";
-const int brokerPort = 1883 ;
+const int brokerPort = 1883;
 
 const String brokerUser = "";
 const String brokerPass = "";
@@ -44,7 +44,7 @@ void loop() {
     mensagem = Serial.readStringUntil('\n');
     Serial.print("Mensagem digitada: ");
     Serial.println(mensagem);
-    mqtt.publish("StrogonoffcomBatataPalha", mensagem.c_str());
+    mqtt.publish("TopicoVini", mensagem.c_str());
   }
   mqtt.loop();
   
