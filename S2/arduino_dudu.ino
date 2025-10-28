@@ -1,9 +1,23 @@
 #include <WiFi.h>
-#include <PubSubClient.h>
+#include <WifiClientSecure.h>
 #include "env.h"
+
+WiFiClient client;
+PubSubClient mqtt(client);
+
+const String SSID = "FIESC_IOT_EDU";
+const String PASS = "8120gv08";
+const String topico = "TopicoVini";
+
+const String brokerURL = "7f3337e189e34386a91cdc05ae8a6d85.s1.eu.hivemq.cloud";
+const int brokerPort = 8883 ;
+
+const String brokerUser = "";
+const String brokerPass = "";
 
 void setup() {
   Serial.begin(115200);    //configura a placa pra mostrar na tela
+  wifiClient.setInsecure();
   WiFi.begin(SSID, PASS);  //tenta conectar na rede
   Serial.println("Conectando ao Wifi");
   while (WiFi.status() != WL_CONNECTED) {
@@ -12,16 +26,15 @@ void setup() {
   }
   Serial.println("Conectado com Sucesso parceiro!");
   Serial.println("Conectando no Broker");
-  mqtt.setServer(BROKER_URL, BROKER_PORT);
+  mqtt.setServer(brokerURL.c_str(), brokerPort);
   String boardID = "S1-";
-  userID += String(random(0xffff), HEX);
+  boardID += String(random(0xffff), HEX);
 
-  while (!mqtt.connected()){
-    mqttClient.connect(userID.c_str(),BROKER_USR_NAME, BROKER_USR_PASS); {
+  while (!mqtt.connect(boardID.c_str())) {
     Serial.print(".");
     delay(200);
   }
-  mqtt.subscribe(TOPIC1);
+  mqtt.subscribe(topico.c_str());
   mqtt.setCallback(callback);
   Serial.println("\nConectado com sucesso ao broker!");
   pinMode(2, OUTPUT);
