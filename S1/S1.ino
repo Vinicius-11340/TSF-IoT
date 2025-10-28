@@ -6,16 +6,6 @@
 WiFiClientSecure wifiClient;
 PubSubClient mqttClient(wificlient);
 
-const String SSID = "FIESC_IOT_EDU";
-const String PASS = "8120gv08";
-const String topico = "StrogonoffcomBatataPalha";
-
-const String brokerURL = "test.mosquitto.org";
-const int brokerPort = 1883;
-
-const String brokerUser = "";
-const String brokerPass = "";
-
 void setup() {
   Serial.begin(115200);
   wifiClient.setInsecure();
