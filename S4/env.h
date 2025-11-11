@@ -9,10 +9,10 @@
 #define BROKER_PORT 8883
 
 //Variáveis do user do Broker
-#define BROKER_USR_NAME "" <- Inserir user criado
-#define BROKER_USR_PASS "" <- Inserir senha criado
+#define BROKER_USR_NAME "Vinicius_Delicinha_III" //<- Inserir user criado
+#define BROKER_USR_PASS "Vinicius1" //<- Inserir senha criado
 
 // Variáveis dos Tópicos
-#define TOPIC1 ""
+#define TOPIC_VELOCIDADE "S4/Velocidade"
 
 #endif
